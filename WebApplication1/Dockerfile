@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+COPY . /app
 WORKDIR /app
-
 # Copiar los archivos del proyecto y restaurar dependencias
 COPY *.csproj ./
 RUN dotnet restore
