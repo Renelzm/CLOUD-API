@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Punto de entrada para la aplicación
-ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
+ENTRYPOINT ["dotnet", "out/PDNCOAH_API.dll"]
