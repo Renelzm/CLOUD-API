@@ -6,4 +6,4 @@ RUN dotnet build
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app/bin/Debug/netcoreapp3.1 .
-ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
+ENTRYPOINT ["dotnet", "/app/bin/Debug/netcoreapp3.1/PDNCOAH_API.dll"]
