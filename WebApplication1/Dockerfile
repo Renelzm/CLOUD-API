@@ -1,15 +1,13 @@
+# Utiliza una imagen base que incluye el runtime y el SDK de .NET Core 3.1
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
-# Copiar los archivos del proyecto y restaurar dependencias
-COPY *.csproj ./
-RUN dotnet restore
 
-# Copiar y construir la aplicación
+# Copiar los archivos del proyecto y restaurar dependencias
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Utilizar una imagen de ASP.NET Core 3.1 para ejecutar la aplicación
+# Etapa final de ejecución
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app/out .
