@@ -1,18 +1,18 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
-# Copia el archivo de proyecto y restaura las dependencias
-COPY *.csproj .
+# Copiar los archivos del proyecto y restaurar dependencias
+COPY *.csproj ./
 RUN dotnet restore
 
-# Copia el resto del código fuente y realiza la publicación
-COPY . .
+# Copiar y construir la aplicación
+COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Crear imagen de aplicación final
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Utilizar una imagen de ASP.NET Core 3.1 para ejecutar la aplicación
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Define el punto de entrada de la aplicación
-ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
+# Punto de entrada para la aplicación
+ENTRYPOINT ["dotnet", "TuArchivo.dll"]
