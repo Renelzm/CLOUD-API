@@ -10,7 +10,7 @@ COPY . ./
 RUN dotnet publish -c Release
 
 # Utilizar una imagen de ASP.NET Core 3.1 para ejecutar la aplicación
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app/
 
