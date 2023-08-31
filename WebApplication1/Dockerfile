@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o /app/
 
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1
-COPY . /app
+COPY --from=build /app/
 WORKDIR /app
 ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
 
