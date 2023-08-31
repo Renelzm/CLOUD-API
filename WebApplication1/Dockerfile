@@ -1,3 +1,4 @@
+# Primera etapa: Construir la aplicación
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
@@ -7,9 +8,9 @@ RUN dotnet restore
 
 # Copiar y construir la aplicación
 COPY . ./
-RUN dotnet publish --no-restore -c Release -o {}
+RUN dotnet publish --no-restore -c Release -o /app/out
 
-# Utilizar una imagen de ASP.NET Core 3.1 para ejecutar la aplicación
+# Segunda etapa: Ejecutar la aplicación en una imagen ASP.NET Core
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app/out .
