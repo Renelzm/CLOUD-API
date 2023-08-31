@@ -8,7 +8,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Etapa final de ejecución
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM gcr.io/google-appengine/aspnetcore:3.1
 WORKDIR /app
 COPY --from=build /app/out .
 
