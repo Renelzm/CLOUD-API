@@ -17,3 +17,5 @@ COPY --from=build /app/out .
 
 # Punto de entrada para la aplicación
 ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
+
+RUN dotnet run
