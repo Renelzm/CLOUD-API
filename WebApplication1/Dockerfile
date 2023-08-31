@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # Copiar y construir la aplicación
 COPY . ./
-RUN dotnet publish --no-restore -c Release -o out
+RUN dotnet publish --no-restore -c Release -o {}
 
 # Utilizar una imagen de ASP.NET Core 3.1 para ejecutar la aplicación
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
