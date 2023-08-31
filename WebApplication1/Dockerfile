@@ -1,5 +1,5 @@
 # Utiliza una imagen base que incluye el runtime y el SDK de .NET Core 3.1
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM gcr.io/google-appengine/aspnetcore:3.1
 WORKDIR /app
 
 
