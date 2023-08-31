@@ -1,5 +1,5 @@
 # Primera etapa: Construir la aplicación
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.4-alpine AS build
 WORKDIR /app
 
 # Copiar los archivos del proyecto y restaurar dependencias
@@ -11,7 +11,7 @@ COPY . ./
 RUN dotnet publish -c Release -o /app/out
 
 # Segunda etapa: Ejecutar la aplicación en una imagen ASP.NET Core
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.4-alpine
 WORKDIR /app
 COPY --from=build /app/out .
 
