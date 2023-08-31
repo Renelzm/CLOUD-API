@@ -8,11 +8,11 @@ RUN dotnet restore
 
 # Copy and build the application
 COPY . ./
-RUN dotnet publish -c Release -o /app/
+RUN dotnet publish -c Release -o /app
 
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1
-COPY --from=build /app/
+COPY --from=build /app
 WORKDIR /app
 ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
 
