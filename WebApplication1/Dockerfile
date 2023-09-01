@@ -13,4 +13,4 @@ RUN dotnet publish -c Release -o /app
 FROM gcr.io/google-appengine/aspnetcore:3.1
 COPY . /app
 WORKDIR /app
-ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
+RUN dotnet PDNCOAH_API.dll
