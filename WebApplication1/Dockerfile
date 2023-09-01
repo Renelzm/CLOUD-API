@@ -1,5 +1,5 @@
 # Build stage
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build-env
 WORKDIR /app
 
 # Copy and restore project dependencies
@@ -7,10 +7,11 @@ COPY *.csproj ./
 RUN dotnet restore
 
 # Copy and build the application
-COPY . ./
-RUN dotnet publish -c Release -o /app
+COPY . .
+RUN dotnet publish --no-restore -c Release -o out .
 
 FROM gcr.io/google-appengine/aspnetcore:3.1
-COPY . /app
+WORKDIR /app
+COPY --from=build-env /app/ .
 
-ENTRYPOINT ["dotnet", "app/PDNCOAH_API.dll"]
+ENTRYPOINT ["dotnet", "PDNCOAH_API.dll"]
