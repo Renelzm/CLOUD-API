@@ -8,7 +8,7 @@ RUN dotnet restore
 
 # Copy and build the application
 COPY . .
-RUN dotnet publish --no-restore -c Release -o .
+RUN dotnet publish -c Release -o /app
 
 FROM gcr.io/google-appengine/aspnetcore:3.1
 WORKDIR /app
