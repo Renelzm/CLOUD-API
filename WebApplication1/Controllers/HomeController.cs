@@ -797,7 +797,7 @@ namespace WebApplication1.Controllers
                                     inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
                                     if (Row["FechaInicialInhabilitacion"].ToString() == "")
                                     {
-                                        inhabilitacionSan.fechaInicial = "";
+                                        inhabilitacionSan.fechaInicial = null;
                                     }
                                     else
                                     {
@@ -805,7 +805,7 @@ namespace WebApplication1.Controllers
                                     }
                                     if (Row["FechaFinalInhabilitacion"].ToString() == "")
                                     {
-                                        inhabilitacionSan.fechaFinal = "";
+                                        inhabilitacionSan.fechaFinal = null;
                                     }
                                     else
                                     {
@@ -1127,7 +1127,7 @@ namespace WebApplication1.Controllers
                                     inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
                                     if (Row["FechaInicialInhabilitacion"].ToString() == "")
                                     {
-                                        inhabilitacionSan.fechaInicial = "";
+                                        inhabilitacionSan.fechaInicial = null;
                                     }
                                     else
                                     {
@@ -1135,7 +1135,7 @@ namespace WebApplication1.Controllers
                                     }
                                     if (Row["FechaFinalInhabilitacion"].ToString() == "")
                                     {
-                                        inhabilitacionSan.fechaFinal = "";
+                                        inhabilitacionSan.fechaFinal = null;
                                     }
                                     else
                                     {
