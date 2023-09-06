@@ -795,19 +795,11 @@ namespace WebApplication1.Controllers
                                     Fila.multa = multaSan;
                                     inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
                                     inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
-                                    if (Row["FechaInicialInhabilitacion"].ToString() == "")
-                                    {
-                                        inhabilitacionSan = null;
-                                    }
-                                    else
+                                    if (Row["FechaInicialInhabilitacion"].ToString() != "")
                                     {
                                         inhabilitacionSan.fechaInicial = Convert.ToDateTime(Row["FechaInicialInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
                                     }
-                                    if (Row["FechaFinalInhabilitacion"].ToString() == "")
-                                    {
-                                        inhabilitacionSan = null;
-                                    }
-                                    else
+                                    if (Row["FechaFinalInhabilitacion"].ToString() != "")
                                     {
                                         inhabilitacionSan.fechaFinal = Convert.ToDateTime(Row["FechaFinalInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
                                     }
@@ -1125,19 +1117,11 @@ namespace WebApplication1.Controllers
 
                                     inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
                                     inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
-                                    if (Row["FechaInicialInhabilitacion"].ToString() == "")
-                                    {
-                                        inhabilitacionSan = null;
-                                    }
-                                    else
+                                    if (Row["FechaInicialInhabilitacion"].ToString() != "")
                                     {
                                         inhabilitacionSan.fechaInicial = Convert.ToDateTime(Row["FechaInicialInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
                                     }
-                                    if (Row["FechaFinalInhabilitacion"].ToString() == "")
-                                    {
-                                        inhabilitacionSan = null;
-                                    }
-                                    else
+                                    if (Row["FechaFinalInhabilitacion"].ToString() != "")
                                     {
                                         inhabilitacionSan.fechaFinal = Convert.ToDateTime(Row["FechaFinalInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
                                     }
