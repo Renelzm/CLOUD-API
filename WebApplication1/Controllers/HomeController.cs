@@ -610,27 +610,30 @@ namespace WebApplication1.Controllers
 
             if (resut == "Valido")
             {
-                if (req.query.tipoSancion != null)
+                if (req.query != null)
                 {
-                    for (var i = 0; i < req.query.tipoSancion.Count; i++)
+                    if (req.query.tipoSancion != null)
                     {
-                        string sqry = "";
-                        string RESULTADO = "";
-                        DataTable Tbl = new DataTable();
-                        sqry = string.Format("Select * from TipoSancion where IdTipoSancion ='{0}'"
-                        , req.query.tipoSancion[i]);
-                        Tbl = Metodos.mandaQry(sqry, ref RESULTADO);
-                        if (Tbl.Rows.Count == 0)
+                        for (var i = 0; i < req.query.tipoSancion.Count; i++)
                         {
-                            resError resError = new resError();
-                            resError.code = "400";
-                            resError.message = "El Tipo Sancion no es Valido.";
-                            //error default unexpected error
-                            DataTable Tbl_2 = new DataTable();
-                            sqry = string.Format("INSERT INTO PDNCOAH.Peticiones VALUES(CURRENT_TIMESTAMP,'SSANC','{0}','{1}','{2}')"
-                            , token, JsonSerializer.Serialize(req), "Error 400 Bad Request");
-                            Tbl_2 = Metodos.mandaQry(sqry, ref RESULTADO);
-                            return BadRequest(resError);
+                            string sqry = "";
+                            string RESULTADO = "";
+                            DataTable Tbl = new DataTable();
+                            sqry = string.Format("Select * from TipoSancion where IdTipoSancion ='{0}'"
+                            , req.query.tipoSancion[i]);
+                            Tbl = Metodos.mandaQry(sqry, ref RESULTADO);
+                            if (Tbl.Rows.Count == 0)
+                            {
+                                resError resError = new resError();
+                                resError.code = "400";
+                                resError.message = "El Tipo Sancion no es Valido.";
+                                //error default unexpected error
+                                DataTable Tbl_2 = new DataTable();
+                                sqry = string.Format("INSERT INTO PDNCOAH.Peticiones VALUES(CURRENT_TIMESTAMP,'SSANC','{0}','{1}','{2}')"
+                                , token, JsonSerializer.Serialize(req), "Error 400 Bad Request");
+                                Tbl_2 = Metodos.mandaQry(sqry, ref RESULTADO);
+                                return BadRequest(resError);
+                            }
                         }
                     }
                 }
@@ -891,6 +894,33 @@ namespace WebApplication1.Controllers
 
             if (resut == "Valido")
             {
+                if (req.query != null)
+                {
+                    if (req.query.tipoSancion != null)
+                    {
+                        for (var i = 0; i < req.query.tipoSancion.Count; i++)
+                        {
+                            string sqry = "";
+                            string RESULTADO = "";
+                            DataTable Tbl = new DataTable();
+                            sqry = string.Format("Select * from TipoSancion_Part where IdTipoSancion ='{0}'"
+                            , req.query.tipoSancion[i]);
+                            Tbl = Metodos.mandaQry(sqry, ref RESULTADO);
+                            if (Tbl.Rows.Count == 0)
+                            {
+                                resError resError = new resError();
+                                resError.code = "400";
+                                resError.message = "El Tipo Sancion no es Valido.";
+                                //error default unexpected error
+                                DataTable Tbl_2 = new DataTable();
+                                sqry = string.Format("INSERT INTO PDNCOAH.Peticiones VALUES(CURRENT_TIMESTAMP,'SSANC','{0}','{1}','{2}')"
+                                , token, JsonSerializer.Serialize(req), "Error 400 Bad Request");
+                                Tbl_2 = Metodos.mandaQry(sqry, ref RESULTADO);
+                                return BadRequest(resError);
+                            }
+                        }
+                    }
+                }
                 DataTable Tabla = Metodos.psanciona(req);
                 if (req.page == null)
                 {
