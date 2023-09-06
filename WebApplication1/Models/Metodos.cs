@@ -1018,7 +1018,7 @@ where SancionServidor_Part.IdParticularSancionado is not null";
             string errCode = "";
             string Query = string.Empty;
 
-            Query = @" Select TipoSancion.IdTipoSancion, TipoSancion.TipoSancion, DescripcionSancion from SancionServidor_Part Inner Join TipoSancion_Part TipoSancion on SancionServidor.IdTipoSancion = TipoSancion.IdTipoSancion where IdServidorPubSancionado = '" + IdServidorPubSancionado + "'";
+            Query = @" Select TipoSancion.IdTipoSancion, TipoSancion.TipoSancion, DescripcionSancion from SancionServidor_Part Inner Join TipoSancion_Part TipoSancion on SancionServidor_Part.IdTipoSancion = TipoSancion.IdTipoSancion where IdParticularSancionado = '" + IdServidorPubSancionado + "'";
 
             if (Query != string.Empty)
             {
