@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace WebApplication1.Controllers
 {
@@ -278,7 +279,8 @@ namespace WebApplication1.Controllers
                 if (Tbl.Rows.Count > 0)
                 {
                     Result = "Valido";
-                } else
+                }
+                else
                 {
                     Result = "Expirado";
                 }
@@ -311,8 +313,8 @@ namespace WebApplication1.Controllers
                 DataTable Tabla = Metodos.spic(reqSpic);
                 if (reqSpic.query != null)
                 {
-                   if (reqSpic.query.TipoProcedimiento != null)
-                {
+                    if (reqSpic.query.TipoProcedimiento != null)
+                    {
                         for (var i = 0; i < reqSpic.query.TipoProcedimiento.Count; i++)
                         {
                             if (!Enumerable.Range(1, 6).Contains(reqSpic.query.TipoProcedimiento[i]))
@@ -429,8 +431,8 @@ namespace WebApplication1.Controllers
                                     DataTable TablaArea = Metodos.Area(Row["IdServidorEnContrataciones"].ToString());
                                     DataTable TablaResponsabilidad = Metodos.Responsabilidad(Row["IdServidorEnContrataciones"].ToString());
                                     DataTable TablaTipoProc = Metodos.TipoProc(Row["IdServidorEnContrataciones"].ToString(), reqSpic);
-                                    
-                                    
+
+
 
                                     Fila.id = Row["IdServidorEnContrataciones"].ToString();
                                     Fila.fechaCaptura = Convert.ToDateTime(Row["FechaCaptura"].ToString());
@@ -513,7 +515,8 @@ namespace WebApplication1.Controllers
                         }
                     }
                 }
-            } else
+            }
+            else
             {
 
                 if (resut == "Expirado")
@@ -747,26 +750,26 @@ namespace WebApplication1.Controllers
                                     Fila.institucionDependencia = InstitucionDependencia;
 
                                     servidorPublicoSan servidorPub = new servidorPublicoSan();
-                                    servidorPub.rfc= Row["RFC"].ToString();
-                                    servidorPub.curp=Row["CURP"].ToString();
-                                    servidorPub.nombres= Row["Nombres"].ToString();
-                                    servidorPub.primerApellido= Row["PrimerApellido"].ToString();
-                                    servidorPub.segundoApellido= Row["SegundoApellido"].ToString();
+                                    servidorPub.rfc = Row["RFC"].ToString();
+                                    servidorPub.curp = Row["CURP"].ToString();
+                                    servidorPub.nombres = Row["Nombres"].ToString();
+                                    servidorPub.primerApellido = Row["PrimerApellido"].ToString();
+                                    servidorPub.segundoApellido = Row["SegundoApellido"].ToString();
 
                                     generoSan geneSan = new generoSan();
-                                    geneSan.clave= Row["IdGenero"].ToString();
-                                    geneSan.valor= Row["Genero"].ToString();
+                                    geneSan.clave = Row["IdGenero"].ToString();
+                                    geneSan.valor = Row["Genero"].ToString();
                                     servidorPub.genero = geneSan;
-                                    servidorPub.puesto= Row["Puesto"].ToString();
-                                    servidorPub.nivel= Row["IdPuesto"].ToString();
-                                    
+                                    servidorPub.puesto = Row["Puesto"].ToString();
+                                    servidorPub.nivel = Row["IdPuesto"].ToString();
+
                                     Fila.servidorPublicoSancionado = servidorPub;
-                                    Fila.autoridadSancionadora= Row["AutoridadSancionadora"].ToString();
+                                    Fila.autoridadSancionadora = Row["AutoridadSancionadora"].ToString();
 
                                     tipoFaltaSan tip = new tipoFaltaSan();
-                                    tip.clave= Row["IdTipoFalta"].ToString();
-                                    tip.valor= Row["TipoFalta"].ToString();
-                                    tip.descripcion= Row["DescripFalta"].ToString();
+                                    tip.clave = Row["IdTipoFalta"].ToString();
+                                    tip.valor = Row["TipoFalta"].ToString();
+                                    tip.descripcion = Row["DescripFalta"].ToString();
 
                                     Fila.tipoFalta = tip;
 
@@ -784,7 +787,7 @@ namespace WebApplication1.Controllers
                                     Fila.causaMotivoHechos = Row["CausaMotivoHechos"].ToString();
                                     resolucionSan resolucionSan = new resolucionSan();
                                     resolucionSan.url = Row["URLResolucion"].ToString();
-                                    resolucionSan.fechaResolucion = Convert.ToDateTime(Row["FechaResolucion"].ToString()).ToString("yyyy-MM-dd");  
+                                    resolucionSan.fechaResolucion = Convert.ToDateTime(Row["FechaResolucion"].ToString()).ToString("yyyy-MM-dd");
                                     Fila.resolucion = resolucionSan;
                                     multaSan multaSan = new multaSan();
                                     multaSan.monto = Convert.ToDouble(Row["MontoMulta"].ToString());
@@ -793,17 +796,20 @@ namespace WebApplication1.Controllers
                                     monedaSan.valor = Row["Moneda"].ToString();
                                     multaSan.moneda = monedaSan;
                                     Fila.multa = multaSan;
-                                    inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
-                                    inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
                                     if (Row["FechaInicialInhabilitacion"].ToString() != "")
                                     {
+                                        inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
                                         inhabilitacionSan.fechaInicial = Convert.ToDateTime(Row["FechaInicialInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
-                                    }
-                                    if (Row["FechaFinalInhabilitacion"].ToString() != "")
-                                    {
                                         inhabilitacionSan.fechaFinal = Convert.ToDateTime(Row["FechaFinalInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
+                                        inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
+                                        Fila.inhabilitacion = inhabilitacionSan;
                                     }
-                                    Fila.inhabilitacion = inhabilitacionSan;
+                                    else
+                                    {
+                                        inhabilitacionSanNull inhabilitacionSanNull = new inhabilitacionSanNull();
+                                        inhabilitacionSanNull.plazo = Row["PlazoInhabilitacion"].ToString();
+                                        Fila.inhabilitacion = inhabilitacionSanNull;
+                                    }
                                     Fila.observaciones = Row["Observaciones"].ToString();
                                     List<documentosSan> ListdocumentosSan = new List<documentosSan>();
                                     foreach (DataRow Rowtipdoc in TablaDocumentos.Rows)
@@ -814,7 +820,7 @@ namespace WebApplication1.Controllers
                                         documentosSan.titulo = Rowtipdoc["Titulo"].ToString();
                                         documentosSan.descripcion = Rowtipdoc["Descripcion"].ToString();
                                         documentosSan.url = Rowtipdoc["URL"].ToString();
-                                        documentosSan.fecha = Convert.ToDateTime(Rowtipdoc["Fecha"].ToString()).ToString("yyyy-MM-dd"); 
+                                        documentosSan.fecha = Convert.ToDateTime(Rowtipdoc["Fecha"].ToString()).ToString("yyyy-MM-dd");
                                         ListdocumentosSan.Add(documentosSan);
 
                                     }
@@ -835,7 +841,8 @@ namespace WebApplication1.Controllers
                         }
                     }
                 }
-            } else
+            }
+            else
             {
 
                 if (resut == "Expirado")
@@ -1065,7 +1072,7 @@ namespace WebApplication1.Controllers
                                     vialidad.valor = Row["Vialidad"].ToString();
                                     domicilioMexico.vialidad = vialidad;
                                     particularSancionado.domicilioMexico = domicilioMexico;
-                                    domicilioExtranjero domicilioExtranjero  = new domicilioExtranjero();
+                                    domicilioExtranjero domicilioExtranjero = new domicilioExtranjero();
                                     pais paisext = new pais();
                                     paisext.clave = Row["DomExt_Pais"].ToString();
                                     paisext.valor = Row["PaisExt"].ToString();
@@ -1081,7 +1088,7 @@ namespace WebApplication1.Controllers
                                     Fila.objetoContrato = Row["ObjetoContrato"].ToString();
                                     Fila.autoridadSancionadora = Row["AutoridadSancionadora"].ToString();
                                     Fila.tipoFalta = Row["TipoFalta"].ToString();
-                                    
+
                                     List<tipoSan> ListTipSan = new List<tipoSan>();
                                     foreach (DataRow Rowtipsan in TablaTipSan.Rows)
                                     {
@@ -1114,18 +1121,22 @@ namespace WebApplication1.Controllers
                                     monedaSan.valor = Row["Moneda"].ToString();
                                     multaSan.moneda = monedaSan;
                                     Fila.multa = multaSan;
-
-                                    inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
-                                    inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
+                                    
                                     if (Row["FechaInicialInhabilitacion"].ToString() != "")
                                     {
+                                        inhabilitacionSan inhabilitacionSan = new inhabilitacionSan();
                                         inhabilitacionSan.fechaInicial = Convert.ToDateTime(Row["FechaInicialInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
-                                    }
-                                    if (Row["FechaFinalInhabilitacion"].ToString() != "")
-                                    {
                                         inhabilitacionSan.fechaFinal = Convert.ToDateTime(Row["FechaFinalInhabilitacion"].ToString()).ToString("yyyy-MM-dd");
+                                        inhabilitacionSan.plazo = Row["PlazoInhabilitacion"].ToString();
+                                        Fila.inhabilitacion = inhabilitacionSan;
                                     }
-                                    Fila.inhabilitacion = inhabilitacionSan;
+                                    else
+                                    {
+                                        inhabilitacionSanNull inhabilitacionSanNull = new inhabilitacionSanNull();
+                                        inhabilitacionSanNull.plazo = Row["PlazoInhabilitacion"].ToString();
+                                        Fila.inhabilitacion = inhabilitacionSanNull;
+                                    }
+                                  
                                     Fila.observaciones = Row["Observaciones"].ToString();
 
                                     List<documentosSan> ListdocumentosSan = new List<documentosSan>();
@@ -1403,7 +1414,7 @@ namespace WebApplication1.Controllers
 
         }
 
-       
+
         public class pagination
         {
             public int pageSize { get; set; }
@@ -1522,7 +1533,7 @@ namespace WebApplication1.Controllers
             public string? tipoPersona { get; set; }
 
         }
-       
+
         public class ssancionesResult
         {
             public paginationSan? pagination { get; set; }
@@ -1553,7 +1564,7 @@ namespace WebApplication1.Controllers
             public string? causaMotivoHechos { get; set; }
             public resolucionSan? resolucion { get; set; }
             public multaSan? multa { get; set; }
-            public inhabilitacionSan? inhabilitacion { get; set; }
+            public Object? inhabilitacion { get; set; }
             public string? observaciones { get; set; }
             public List<documentosSan>? documentos { get; set; }
 
@@ -1575,7 +1586,7 @@ namespace WebApplication1.Controllers
             public responsableSancion? responsableSancion { get; set; }
             public resolucionpSan? resolucion { get; set; }
             public multaSan? multa { get; set; }
-            public inhabilitacionSan? inhabilitacion { get; set; }
+            public Object? inhabilitacion { get; set; }
             public string? observaciones { get; set; }
             public List<documentosSan>? documentos { get; set; }
 
@@ -1644,7 +1655,7 @@ namespace WebApplication1.Controllers
             public string? primerApellido { get; set; }
             public string? segundoApellido { get; set; }
             public string? curp { get; set; }
-           
+
         }
         public class apoderadoLegal
         {
@@ -1726,6 +1737,12 @@ namespace WebApplication1.Controllers
             public string? fechaInicial { get; set; }
             public string? fechaFinal { get; set; }
         }
+
+        public class inhabilitacionSanNull
+        {
+            public string? plazo { get; set; }
+        }
+
         public class documentosSan
         {
             public string? id { get; set; }
